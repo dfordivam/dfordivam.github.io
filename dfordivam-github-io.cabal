@@ -1,0 +1,21 @@
+name:                dfordivam-github-io
+version:             0.1.0.0
+-- synopsis:
+-- description:
+homepage:            https://github.com/dfordivam/dfordivam-github-io#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Divam Narula
+maintainer:          dfordivam@gmail.com
+copyright:           All rights reserved
+category:            web
+build-type:          Simple
+extra-source-files:  README.md
+cabal-version:       >=1.10
+
+executable dfordivam-github-io
+  main-is:             site.hs
+  default-language:    Haskell2010
+  ghc-options:         -threaded
+  build-depends:       base >= 4.7 && < 5,
+                       hakyll
