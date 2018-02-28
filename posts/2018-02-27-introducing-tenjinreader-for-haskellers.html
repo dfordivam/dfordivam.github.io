@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>dfordivam' blog - Introducing tenjinreader.com for Haskellers</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                <a href="../">dfordivam' blog</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Introducing tenjinreader.com for Haskellers</h1>
+
+            <div class="info">
+    Posted on February 27, 2018
+    
+</div>
+
+<p>I created this application based on my own experiences and requirements for Japanese language learning.</p>
+<p>This post is mainly for Haskell developers, so I will not discuss anything about the Japanese language learning part of this application here. Checkout my other post for details on that.</p>
+<hr />
+<h2 id="the-big-picture">The Big Picture</h2>
+<p>The app is written end-to-end in Haskell.</p>
+<p>Moreover, I tried to use a bunch of new (experimental) stuff, so this blog post is about my experience</p>
+<p>I started web programming just one year back. I have used Haskell for more than 4 years, and it is easier for me to use complex Haskell stuff than learn javascript.</p>
+<p>In a period of almost 5 months I was able to make this app from an idea to a beta release.</p>
+<p>The total code base is approx (lines of Haskell code). <a href="https://github.com/blueimpact/tenjinreader">Source code on Github</a></p>
+<ul>
+<li>Frontend - 3k</li>
+<li>Backend - 3k</li>
+<li>Common - 1k</li>
+</ul>
+<p>and about 1k more for some extra libraries I created for this project, but pulled in a separate project.</p>
+<h2 id="reflex-frp">Reflex FRP</h2>
+<p>Frontend is written entirely using Reflex-DOM FRP library.</p>
+<h4 id="the-good">The good</h4>
+<ul>
+<li><p>Its Haskell</p>
+<p>Having both FE and BE in Haskell is awesome. There have been many occasions where I have moved the code (by copy-paste) between the three projects.</p></li>
+<li><p>With Reflex code refactoring and changes in UI are very easy. Moving around widgets, re-using widgets from multiple places, its all very easy.</p></li>
+<li><p><a href="https://github.com/ElvishJerricco/reflex-project-skeleton"><code>reflex-project-skeleton</code></a>, <code>nix</code>, and <code>jsaddle-warp</code> are amazing for development workflow. I even do the deployment via <code>nix-copy-closure</code> which is awesome.</p>
+<p>There was an initial struggle with nix, but there are now a number of good resources, and #reflex-frp is an awesome support channel.</p></li>
+<li><p>For websocket I created a <a href="https://github.com/dfordivam/reflex-websocket-interface">small library</a> specially for reflex. Behind the scenes this library does a lot of plumbing of Events, encoding / decoding of messages.</p>
+<p>The experience has been great, I dont have to think a second time before changing some message type or adding new requests.</p>
+<p>Moreover the code to communicate with server can now be part of the widget itself. Things works so seamlessly.</p>
+<p>In the start of a new feature I dont really know what all data will be required in frontend, so I pull-in the complete entries from DB (thats why a lot of DB stuff is in <code>common</code> package with ToJSON and FromJSON instances).</p>
+<p>Then I write code in frontend to manipulate the data and get it to what I need. Later I have the choice to move this code to backend, and only send the manipulated data to frontend. (But many times I let things as it is, the client should also do some work!)</p></li>
+</ul>
+<p>I am sure there is a lot more good, but I think it would be obvious in a comparison to other technologies. I hardly have any experience of frontend development, so I will now start with the pain points…</p>
+<h4 id="difficulties">Difficulties</h4>
+<ul>
+<li><p>Large <code>rec</code> blocks are hard to compile as the error messages can be misleading, especially if you make mistakes in using things which are to be used monadically <code>MonadWidget</code> with <code>Event</code>/ <code>Dynamic</code>.</p>
+<p>The <code>rec</code> block can also introduce strange loops or hang the app. Although they are not that hard to debug (as you can fairly easily pin point the code causing it). But the solution often involves heuristically adding <code>delay</code> to make it work.</p>
+<p>Tip 1 - Dont re-use names like this, its very easy to mess things up and create loops.</p>
+<pre><code>rec
+  retVal &lt;- do
+    retVal &lt;- someStuff
+    ...
+    return retVal</code></pre>
+<p>Tip 2 - When the code starts to get complicated with nested <code>rec</code> blocks, create a separate function.</p>
+<p>There is also a weird problem that a polymorphic function does not type-check if defined inside a <code>let</code> block inside <code>rec</code> (without an explicit type signature). This can be annoying for a new comer, as the code is fine but still it does not compile.</p></li>
+<li><p>The <code>Reflex.Collection</code> consist of a bunch of useful widgets, but their behaviour and use-case can be dificult to comprehend.</p></li>
+<li><p>It can be tricky to handle big <code>Dynamic</code> values.</p>
+<p>For example I had to create a <code>Event t (Set Int)</code> from <code>[Dynamic t (Bool, Int)]</code>. The <code>[]</code> -&gt; <code>Set</code> -&gt; <code>tagDyn</code> approach was not good, instead <code>[]</code> -&gt; <code>tagDyn</code> -&gt; <code>Set</code> is better.</p>
+<p><code>dyn</code> is tricky, avoid it. Use <code>widgetHold</code> instead.</p></li>
+<li><p>Reflex eco-system still need a consolidated resource of information. I have done some contributions last year to the docs, and have a bunch of more stuff lying around in my local repo to update the docs.</p></li>
+<li><p>When opening the app, about 10% of the time there are some strange errors / assertion in reflex runtime like “Causality loop found”. On doing a refresh it mostly works fine.</p></li>
+<li><p>The performance of certain parts of app is terrible, I attribute it to <code>ghcjs</code> mostly (as the performance was better with <code>jsaddle-warp</code>), and hope with <code>webghc</code> things will be much better.</p></li>
+<li><p>When the structure of DOM is not according to what you desire, you have the choice to refactor code and pass <code>Event</code> and <code>Dynamic</code> all around the app, or to use some CSS magic to fix stuff (like <code>z-index</code>, <code>position: absolute</code>).</p></li>
+<li><p>When using external JS libraries with reflex-dom</p>
+<ul>
+<li><p>Delay in events are required to get things like DOM Apis / FFI to work properly.</p></li>
+<li><p>If the external JS throws an exception then the app is dead. Perhaps there is a way to catch and continue?</p></li>
+<li><p>Integration with UI libraries like Bootstrap, Semantic UI, etc is still in development, more effort is required to make it work.</p></li>
+</ul></li>
+<li><p>The use of a monadic style for DOM creation can be difficult at times, but I feel its a minor thing and the pros outweigh the cons.</p></li>
+</ul>
+<h2 id="haskey-for-persistent-db">Haskey for persistent DB</h2>
+<p>For the DB I have taken an even more experimental approach by not using any conventional DB or even acid libraries. The reason for this was I wanted simplicity in usage, and the data should not be completely in memory.</p>
+<p>The <a href="https://github.com/haskell-haskey/haskey"><code>haskey</code></a> library released in late last year fortunately had both these features.</p>
+<p>This was a very important for me to do fast development, as I re-modelled the schema dozens of times based on the requirements in Frontend, and incremental addition of small features here and there.</p>
+<p>So <code>haskey</code> is a new library and <strong>definitely not yet ready for production.</strong></p>
+<p>While still developing the application I found a <a href="https://github.com/haskell-haskey/haskey/issues/70">major bug</a> in its code, it was fixed fast thanks to the author!</p>
+<p>But the real scary stuff was; after putting the site on production my own data got corrupted after a few days. I dont know yet what happened; fortunately I had backups to recover it from the previous day.</p>
+<p>So there are definitely more bugs lurking around in the code, and the only safe way to use this library is to always take backups / snapshots (like hourly)</p>
+<p>One good thing I did with <code>haskey</code> is to keep the data of every user in a separate DB (filesystem folder). This greatly simplified my code base and doing recovery from backups.</p>
+<h4 id="migrations-in-haskey">Migrations in Haskey</h4>
+<p>For migrations I used a method inspired by <em>Trees that Grow</em> paper. The idea is to use <code>type family</code> to have different variations of a tree data structure. In my case I have just two variations of the main schema: a <code>CurrentDB</code> and an <code>OldDB</code>. The application code always works on the <code>CurrentDB</code> and the <code>OldDB</code> is used to for migrating old schema to the current one.</p>
+<p>Maintaining many versions of schema will be a much more complicated task, perhaps it can be done using this approach but I am not too sure.</p>
+<p>There were a few issues in getting the code to compile with the use of <code>type family</code>, specifically in the <code>instance</code> / <code>deriving instance</code> declarations. I have used some hit and trial to get it working. But it would be good to have a better understanding / proper way of doing it. (ie dont refer to my code as a correct way to do it, there might be bugs)</p>
+<h3 id="yesod">Yesod</h3>
+<p>The backend is using <code>yesod</code>, it is very simple to set up a web site with authentication using the existing libraries. The major work is done via websocket, so there was no need for a library like <code>servant</code>.</p>
+<h2 id="dev-workflow">Dev workflow</h2>
+<ul>
+<li>Spacemacs with simple support of haskell like syntax highlighting, and hindent</li>
+<li>Local hoogle server running from nix-shell</li>
+<li><code>./cabal new-repl</code> from the project skeleton, and sometimes ghcid.</li>
+<li>Frontend running on Chrome via <code>jsaddle-warp</code>.</li>
+</ul>
+<h2 id="final-thoughts">Final thoughts</h2>
+<ul>
+<li><p>Your application need to have a certain level of complexity to demand the use of Reflex. I think this app had a good enough complexity to deserve this.</p>
+<p>There is a learning curve with reflex. It will only pay for itself when the application is complex.</p></li>
+<li><p><code>Haskey</code> is a good library for fast prototyping, more robust DB can be put in place later.</p></li>
+<li><p>I embraced <code>lens</code> (and some of its operators) while working on this, I would say that the effort pays back.</p></li>
+<li><p>I dont have any testing stuff right now for this app. There were a few functions which were algorithmically complex, and I just created a small test function next to it, for manual testing.</p>
+<p>Things have been ok as I am the only dev working on this project. With multiple people there is definitely a need for a test-suite.</p></li>
+</ul>
+
+        </div>
+        <div id="footer">
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+        </div>
+    </body>
+</html>

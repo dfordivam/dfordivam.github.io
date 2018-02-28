@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>dfordivam' blog - Introducing tenjinreader.com</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                <a href="../">dfordivam' blog</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Introducing tenjinreader.com</h1>
+
+            <div class="info">
+    Posted on February 27, 2018
+    
+</div>
+
+<p>My thoughts on the motivation and design of <a href="https://tenjinreader.com">tenjinreader.com</a></p>
+<h2 id="background">Background</h2>
+<p>There can be many different ways to learn a language. Talking (speaking and listening) in your day to day life is the best way.</p>
+<p>The second best is studying. Studying happens in a calm, relaxed, and distraction free environment. It takes a lot of effort / discipline to study, but it does give better results.</p>
+<p>I am right now focusing my efforts more on studying/reading because it is easier than talking (for me, I dont talk a lot). I learned English by reading dozens of books, and I think I can learn Japanese also.</p>
+<h2 id="motivation-behind-the-srs">Motivation behind the SRS</h2>
+<p>I have been doing SRS reviews from the very start of Japanese learning. I find them very helpful to retain the vocabulary.</p>
+<p>I wanted to try speech recognition for doing my reviews, so this was the main motivation behind developing a new browser based SRS app from scratch.</p>
+<p>There were a few shortcomings in the existing tools, which led me to the current design.</p>
+<h3 id="wanikani-and-houhou-srs">Wanikani and HouHou SRS</h3>
+<p>I used Wanikani for an year, but I realised I dont want to spend so much time learning Kanji. Also I wanted a customised study, the flixibility to chose which words I learn first, and for which words I learn the Kanji form.</p>
+<p>Then I moved on to HouHou SRS, it was a much better experience, as I could suspend review items which were nor relevant or difficult, and instead focus on the vocabulary which I can understand.</p>
+<p>I used it for almost an year, it was going good but then I installed Linux as a primary OS, and now I could not longer do my reviews.</p>
+<h3 id="anki">Anki</h3>
+<p>Also during this time I started using Anki for doing the production reviews, for much of the same vocabulary as HouHou SRS. I found it odd to use two different tools, one for recognition reviews and other one for production.</p>
+<p>Nevertheless these are the good things about Anki</p>
+<ul>
+<li><p>I like the interval increment mechanism of Anki. If you answer a question correctly after 10 days, but it was due for 2 days. Then the next review time will be calculated not by 2 days but 10 days. I feel this is much better than the bucket system of Wanikani / HouHou SRS</p></li>
+<li><p>I did not have to type the answer. This was especially annoying for entering the english meanings in HouHou / Wanikani. In my case I spend a lot of time in front of computer for my job, mostly typing and I wanted to avoid putting more strain on my wrists.</p>
+<p>But even for hiragana input I found that many times I know the answer, and its more convenient to press the 知っている button.</p></li>
+</ul>
+<p><strong>In my opinion the repetition part of the SRS should be emphasised over the game/quiz part. Its more important to have a look at the vocabulary again and again, than to answer it correctly.</strong></p>
+<h3 id="srs-in-tenjinreader">SRS in tenjinreader</h3>
+<p>The ability to answer the reviews using voice was a really the driving factor behind the design of SRS in tenjinreader</p>
+<p>For this feature I surveyed and tried out the existing speech to text technologies for a few months, like Kaldi and Julius.</p>
+<p>I even got the Juluis speech recognition engine to work with a browser frontend. But the quality of recognition was unacceptable. It would be very frustating for a user if she has to repeat the answers multiple times. The language learning itself is a difficult process, and giving an answer should not be this difficult.</p>
+<p>So I decided to use the Google’s speech recognition (via Chrome or Chromium browser).</p>
+<h2 id="motivation-behind-the-design-of-reader">Motivation behind the design of Reader</h2>
+<p>After coming to Japan I immediately realised my studies were incomplete. I had never studied the grammar and had no clue how to use the words in sentences.</p>
+<p>I went through the <a href="http://www.guidetojapanese.org/learn/grammar">Tae Kim’s awesome grammar guide</a> (and still refer it). But what I really needed now was a way to not just learn useful words, but also see them used in sentences.</p>
+<p>So soon I started with a school textbook of 5th grade containing short stories. The content was interesting but it was quite difficult for me to read it properly, as I had to constantly refer to dictionary or online resources, and sometimes use Google translate’ Camera feature just to figure out the start and end of words.</p>
+<p>When I tried to look for computer based tools for reading Japanese, I found them to be much worse than SRS. The reading of Japanese material is especially complicated because of the Kanji and lack of spacing between words.</p>
+<p>I soon found japanese.io, and it was a big improvement over the earlier tools. After using it for few months I found these problems.</p>
+<ul>
+<li><p>It could not handle long texts.</p>
+<p>I had to split my books in chapters and then split the chapters further in few pages.</p></li>
+<li><p>The interface was not that good</p>
+<p>I wanted strong contrast when reading on my ebook reader (like proper black color on a white background), and dark theme when using laptop. So I had to manually tinker the page’s styling.</p></li>
+<li><p>I wanted a way to hide the furigana for the words I already know or studying.</p></li>
+</ul>
+<p>Overall it was manageable but not a good experience. So this was the major motivation to create this reader.</p>
+<h3 id="with-tenjin-reader">With tenjin reader</h3>
+<ul>
+<li><p>I can read books: It even remembers my reading progress</p></li>
+<li><p>It is well integrated with SRS: Especially the furigana visibility</p></li>
+<li><p>I can change the look and feel</p>
+<p>The vertical text somehow feels better to read, perhaps just for aesthetic pleasure. (But why not, there are people who learn Japanese just to draw the Kanji)</p></li>
+<li><p>The interface of showing the word meaning is better</p>
+<p>The pop-up showing the meaning does not hide the actual word. This was a very annoying problem with japanese.io while using on ebook reader.</p></li>
+<li><p>I can mark the sentences as favourite, and review them again through “Random Fav sentence” feature.</p>
+<p>I can do a nested search for meaning + sentence in the same browser window. This is very important to not get distracted, and helps to get back where you started.</p></li>
+<li><p>It properly handles the furigana specified in the ruby《》 (especially for archaic usage in texts in public domain)</p></li>
+<li><p>While using an ebook reader scrolling is very difficult, it is easier to click and change the page.</p></li>
+</ul>
+
+        </div>
+        <div id="footer">
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+        </div>
+    </body>
+</html>
