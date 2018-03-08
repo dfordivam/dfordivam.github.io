@@ -35,7 +35,7 @@ Frontend is written entirely using Reflex-DOM FRP library.
 
 * Its Haskell
 
-  Having both FE and BE in Haskell is awesome. There have been many occasions where I have moved the code (by copy-paste) between the three projects.
+  Having both FE and BE in Haskell is awesome. There have been many occasions where I have moved the code (by cut-paste) between the three projects.
 
 * With Reflex code refactoring and changes in UI are very easy. Moving around widgets, re-using widgets from multiple places, its all very easy.
 
