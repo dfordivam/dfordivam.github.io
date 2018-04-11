@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>dfordivam' blog</title>
+    <link href="https://dfordivam.github.io/atom.xml" rel="self" />
+    <link href="https://dfordivam.github.io" />
+    <id>https://dfordivam.github.io/atom.xml</id>
+    <author>
+        <name>Divam</name>
+        <email>dfordivam@gmail.com</email>
+    </author>
+    <updated>2018-03-08T00:00:00Z</updated>
+    <entry>
+    <title>「tenjinreader.com」の開発体験レポート</title>
+    <link href="https://dfordivam.github.io/posts/2018-03-08-%E3%80%8Ctenjinreader.com%E3%80%8D%E3%81%AE%E9%96%8B%E7%99%BA%E4%BD%93%E9%A8%93%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88.html" />
+    <id>https://dfordivam.github.io/posts/2018-03-08-%E3%80%8Ctenjinreader.com%E3%80%8D%E3%81%AE%E9%96%8B%E7%99%BA%E4%BD%93%E9%A8%93%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88.html</id>
+    <published>2018-03-08T00:00:00Z</published>
+    <updated>2018-03-08T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on March  8, 2018
+    
+</div>
+
+<p>このアプリケーションを自身の日本語の学習経験と必要条件ですから使っていました。</p>
+<p>この記事はHaskell　Developersについてから、こちら日本語学習とアプリの設計ことについては何も話しません。</p>
+<hr />
+<h2 id="はじめて">はじめて</h2>
+<p>このアプリケーション全部Haskellで書いています.</p>
+<p>しかも、いくつか新しい（実験的な）ライブラリーを使用とした。このブログは私の経験です。</p>
+<p>一年前ウェブプログラミングを始めた。Haskellを４年上に使ってから、これはJavascriptより簡単と感じます</p>
+<p>五ヶ月に仕上げました。</p>
+<p><a href="https://github.com/blueimpact/tenjinreader">Source code on Github</a></p>
+<p>総コードベースは約</p>
+<ul>
+<li>Frontend - 3k</li>
+<li>Backend - 3k</li>
+<li>Common - 1k</li>
+</ul>
+<h2 id="reflex-frp">Reflex FRP</h2>
+<p>Frontend は全部「Reflex-DOM FRP」で使っていました。</p>
+<h4 id="いい">いい</h4>
+<ul>
+<li><p>全部 Haskell</p>
+<p>Frontend と Backend　の両方を　Haskell　に持っていているのは素晴らしいです。３つのプロジェクトの間でコードを cut-paste から移動してきました。</p></li>
+<li><p>Reflex　に　Code refactoring　と　UI　変更、 Widget　の移動と複数の場所で再利用がは非常に簡単です。</p></li>
+<li><p><a href="https://github.com/ElvishJerricco/reflex-project-skeleton"><code>reflex-project-skeleton</code></a>、 <code>nix</code>　と <code>jsaddle-warp</code> は 開発ワークフローにとって非常に役に立ちます。 <code>nix-copy-closure</code>からサーバーの deployment は簡単です。</p>
+<p>nix との最初の闘争がありましたが、現在は数多くの優れたリソースがあります。#reflex-frp IRC channel は非常に役に立ちます。</p></li>
+<li><p>websocket のために、自分で作った小さな<a href="https://github.com/dfordivam/reflex-websocket-interface">ライブラリ</a>を使用します。 舞台裏でこのライブラリはメッセージのエンコーディング/デコードやイベントの配達するがやっています。</p>
+<p>新しいメーセージを参加するや変更するはとりわけ簡単です</p>
+<p>サーバーコミュニケーションのコードは　Widget 自体に含まれています。</p>
+<p>新しい機能の開始時に、Frontend でどのようなダータ形式は必要が知りませんから、Backend(DB)　から生データを転送します。</p>
+<p>Frontend で色々な場所で生データを操作しまして適切な形式を決定します。これからこのコードを　Backend に移動することができます。</p></li>
+</ul>
+<h4 id="困難と挑戦">困難と挑戦</h4>
+<ul>
+<li><p>大きな <code>rec</code> block にコードの　compilation は難しい、エラーメッセージは誤解を招く可能性があります。</p>
+<p><code>rec</code> block はまた、奇妙なループを導入したり、アプリケーションを停止させたりする可能性があります。これを解決策ためには、<code>delay</code>を加えることがあります</p>
+<p>Tip 1 - 変数名を再利用しないでください</p>
+<pre><code>rec
+  retVal &lt;- do
+    retVal &lt;- someStuff
+    ...
+    return retVal</code></pre>
+<p>Tip 2 - <code>rec</code> block が複雑になるときは、別の関数を作成してください。</p></li>
+<li><p><code>Reflex.Collection</code>で有用な関数がありますが、それらのゆ動作とユースケースを理解するのは難しいでしょう。</p></li>
+<li><p>大きな<code>Dynamic</code>は扱いにくい</p>
+<p>例えば：<code>[Dynamic t (Bool, Int)]</code> から　<code>Event t (Set Int)</code> を作るために <code>[]</code> -&gt; <code>Set</code> -&gt; <code>tagDyn</code> より <code>[]</code> -&gt; <code>tagDyn</code> -&gt; <code>Set</code>　良い。</p>
+<p><code>dyn</code> より <code>widgetHold</code> 良い。</p></li>
+<li><p>Reflex はまだ統合された情報源を必要としている。</p></li>
+<li><p><code>ghcjs</code> のパフォーマンスは良くありません。<code>webghc</code>でより良いパフォーマンスが期待できます。</p></li>
+<li><p>External JS library を使って時</p>
+<ul>
+<li><p>時々FFI や DOM APIs を正しく機能ために<code>delay</code>が必要です。</p></li>
+<li><p>External JS は例外した場合、アプリは停止します。</p></li>
+<li><p>Bootstrap, Semantic UI ようなライブラリのと統合はまだ進行中です。</p></li>
+</ul></li>
+</ul>
+<h2 id="開発環境">開発環境</h2>
+<ul>
+<li><p><code>Spacemacs</code> with syntax highlighting, and <code>hindent</code></p></li>
+<li><p>Local <code>hoogle</code> server running from <code>nix-shell</code></p></li>
+<li><p><code>./cabal new-repl</code> from the project skeleton, and sometimes <code>ghcid</code>.</p></li>
+<li><p>Frontend running on Chrome via <code>jsaddle-warp</code>.</p></li>
+</ul>
+]]></summary>
+</entry>
+<entry>
+    <title>Introducing tenjinreader.com</title>
+    <link href="https://dfordivam.github.io/posts/2018-02-27-introducing-tenjinreader.html" />
+    <id>https://dfordivam.github.io/posts/2018-02-27-introducing-tenjinreader.html</id>
+    <published>2018-02-27T00:00:00Z</published>
+    <updated>2018-02-27T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on February 27, 2018
+    
+</div>
+
+<p>My thoughts on the motivation and design of <a href="https://tenjinreader.com">tenjinreader.com</a></p>
+<h2 id="background">Background</h2>
+<p>There can be many different ways to learn a language. Talking (speaking and listening) in your day to day life is the best way.</p>
+<p>The second best is studying. Studying happens in a calm, relaxed, and distraction free environment. It takes a lot of effort / discipline to study, but it does give better results.</p>
+<p>I am right now focusing my efforts more on studying/reading because it is easier than talking (for me, I dont talk a lot). I learned English by reading dozens of books, and I think I can learn Japanese also.</p>
+<h2 id="motivation-behind-the-srs">Motivation behind the SRS</h2>
+<p>I have been doing SRS reviews from the very start of Japanese learning. I find them very helpful to retain the vocabulary.</p>
+<p>I wanted to try speech recognition for doing my reviews, so this was the main motivation behind developing a new browser based SRS app from scratch.</p>
+<p>There were a few shortcomings in the existing tools, which led me to the current design.</p>
+<h3 id="wanikani-and-houhou-srs">Wanikani and HouHou SRS</h3>
+<p>I used Wanikani for an year, but I realised I dont want to spend so much time learning Kanji. Also I wanted a customised study, the flixibility to chose which words I learn first, and for which words I learn the Kanji form.</p>
+<p>Then I moved on to HouHou SRS, it was a much better experience, as I could suspend review items which were nor relevant or difficult, and instead focus on the vocabulary which I can understand.</p>
+<p>I used it for almost an year, it was going good but then I installed Linux as a primary OS, and now I could not longer do my reviews.</p>
+<h3 id="anki">Anki</h3>
+<p>Also during this time I started using Anki for doing the production reviews, for much of the same vocabulary as HouHou SRS. I found it odd to use two different tools, one for recognition reviews and other one for production.</p>
+<p>Nevertheless these are the good things about Anki</p>
+<ul>
+<li><p>I like the interval increment mechanism of Anki. If you answer a question correctly after 10 days, but it was due for 2 days. Then the next review time will be calculated not by 2 days but 10 days. I feel this is much better than the bucket system of Wanikani / HouHou SRS</p></li>
+<li><p>I did not have to type the answer. This was especially annoying for entering the english meanings in HouHou / Wanikani. In my case I spend a lot of time in front of computer for my job, mostly typing and I wanted to avoid putting more strain on my wrists.</p>
+<p>But even for hiragana input I found that many times I know the answer, and its more convenient to press the 知っている button.</p></li>
+</ul>
+<p><strong>In my opinion the repetition part of the SRS should be emphasised over the game/quiz part. Its more important to have a look at the vocabulary again and again, than to answer it correctly.</strong></p>
+<h3 id="srs-in-tenjinreader">SRS in tenjinreader</h3>
+<p>The ability to answer the reviews using voice was a really the driving factor behind the design of SRS in tenjinreader</p>
+<p>For this feature I surveyed and tried out the existing speech to text technologies for a few months, like Kaldi and Julius.</p>
+<p>I even got the Juluis speech recognition engine to work with a browser frontend. But the quality of recognition was unacceptable. It would be very frustating for a user if she has to repeat the answers multiple times. The language learning itself is a difficult process, and giving an answer should not be this difficult.</p>
+<p>So I decided to use the Google’s speech recognition (via Chrome or Chromium browser).</p>
+<h2 id="motivation-behind-the-design-of-reader">Motivation behind the design of Reader</h2>
+<p>After coming to Japan I immediately realised my studies were incomplete. I had never studied the grammar and had no clue how to use the words in sentences.</p>
+<p>I went through the <a href="http://www.guidetojapanese.org/learn/grammar">Tae Kim’s awesome grammar guide</a> (and still refer it). But what I really needed now was a way to not just learn useful words, but also see them used in sentences.</p>
+<p>So soon I started with a school textbook of 5th grade containing short stories. The content was interesting but it was quite difficult for me to read it properly, as I had to constantly refer to dictionary or online resources, and sometimes use Google translate’ Camera feature just to figure out the start and end of words.</p>
+<p>When I tried to look for computer based tools for reading Japanese, I found them to be much worse than SRS. The reading of Japanese material is especially complicated because of the Kanji and lack of spacing between words.</p>
+<p>I soon found japanese.io, and it was a big improvement over the earlier tools. After using it for few months I found these problems.</p>
+<ul>
+<li><p>It could not handle long texts.</p>
+<p>I had to split my books in chapters and then split the chapters further in few pages.</p></li>
+<li><p>The interface was not that good</p>
+<p>I wanted strong contrast when reading on my ebook reader (like proper black color on a white background), and dark theme when using laptop. So I had to manually tinker the page’s styling.</p></li>
+<li><p>I wanted a way to hide the furigana for the words I already know or studying.</p></li>
+</ul>
+<p>Overall it was manageable but not a good experience. So this was the major motivation to create this reader.</p>
+<h3 id="with-tenjin-reader">With tenjin reader</h3>
+<ul>
+<li><p>I can read books: It even remembers my reading progress</p></li>
+<li><p>It is well integrated with SRS: Especially the furigana visibility</p></li>
+<li><p>I can change the look and feel</p>
+<p>The vertical text somehow feels better to read, perhaps just for aesthetic pleasure. (But why not, there are people who learn Japanese just to draw the Kanji)</p></li>
+<li><p>The interface of showing the word meaning is better</p>
+<p>The pop-up showing the meaning does not hide the actual word. This was a very annoying problem with japanese.io while using on ebook reader.</p></li>
+<li><p>I can mark the sentences as favourite, and review them again through “Random Fav sentence” feature.</p>
+<p>I can do a nested search for meaning + sentence in the same browser window. This is very important to not get distracted, and helps to get back where you started.</p></li>
+<li><p>It properly handles the furigana specified in the ruby《》 (especially for archaic usage in texts in public domain)</p></li>
+<li><p>While using an ebook reader scrolling is very difficult, it is easier to click and change the page.</p></li>
+</ul>
+]]></summary>
+</entry>
+<entry>
+    <title>Introducing tenjinreader.com for Haskellers</title>
+    <link href="https://dfordivam.github.io/posts/2018-02-27-introducing-tenjinreader-for-haskellers.html" />
+    <id>https://dfordivam.github.io/posts/2018-02-27-introducing-tenjinreader-for-haskellers.html</id>
+    <published>2018-02-27T00:00:00Z</published>
+    <updated>2018-02-27T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on February 27, 2018
+    
+</div>
+
+<p>I created this application based on my own experiences and requirements for Japanese language learning.</p>
+<p>This post is mainly for Haskell developers, so I will not discuss anything about the Japanese language learning part of this application here. Checkout my other post for details on that.</p>
+<hr />
+<h2 id="the-big-picture">The Big Picture</h2>
+<p>The app is written end-to-end in Haskell.</p>
+<p>Moreover, I tried to use a bunch of new (experimental) stuff, so this blog post is about my experience</p>
+<p>I started web programming just one year back. I have used Haskell for more than 4 years, and it is easier for me to use complex Haskell stuff than learn javascript.</p>
+<p>In a period of almost 5 months I was able to make this app from an idea to a beta release.</p>
+<p>The total code base is approx (lines of Haskell code). <a href="https://github.com/blueimpact/tenjinreader">Source code on Github</a></p>
+<ul>
+<li>Frontend - 3k</li>
+<li>Backend - 3k</li>
+<li>Common - 1k</li>
+</ul>
+<p>and about 1k more for some extra libraries I created for this project, but pulled in a separate project.</p>
+<h2 id="reflex-frp">Reflex FRP</h2>
+<p>Frontend is written entirely using Reflex-DOM FRP library.</p>
+<h4 id="the-good">The good</h4>
+<ul>
+<li><p>Its Haskell</p>
+<p>Having both FE and BE in Haskell is awesome. There have been many occasions where I have moved the code (by cut-paste) between the three projects.</p></li>
+<li><p>With Reflex code refactoring and changes in UI are very easy. Moving around widgets, re-using widgets from multiple places, its all very easy.</p></li>
+<li><p><a href="https://github.com/ElvishJerricco/reflex-project-skeleton"><code>reflex-project-skeleton</code></a>, <code>nix</code>, and <code>jsaddle-warp</code> are amazing for development workflow. I even do the deployment via <code>nix-copy-closure</code> which is awesome.</p>
+<p>There was an initial struggle with nix, but there are now a number of good resources, and #reflex-frp is an awesome support channel.</p></li>
+<li><p>For websocket I created a <a href="https://github.com/dfordivam/reflex-websocket-interface">small library</a> specially for reflex. Behind the scenes this library does a lot of plumbing of Events, encoding / decoding of messages.</p>
+<p>The experience has been great, I dont have to think a second time before changing some message type or adding new requests.</p>
+<p>Moreover the code to communicate with server can now be part of the widget itself. Things works so seamlessly.</p>
+<p>In the start of a new feature I dont really know what all data will be required in frontend, so I pull-in the complete entries from DB (thats why a lot of DB stuff is in <code>common</code> package with ToJSON and FromJSON instances).</p>
+<p>Then I write code in frontend to manipulate the data and get it to what I need. Later I have the choice to move this code to backend, and only send the manipulated data to frontend. (But many times I let things as it is, the client should also do some work!)</p></li>
+</ul>
+<p>I am sure there is a lot more good, but I think it would be obvious in a comparison to other technologies. I hardly have any experience of frontend development, so I will now start with the pain points…</p>
+<h4 id="difficulties">Difficulties</h4>
+<ul>
+<li><p>Large <code>rec</code> blocks are hard to compile as the error messages can be misleading, especially if you make mistakes in using things which are to be used monadically <code>MonadWidget</code> with <code>Event</code>/ <code>Dynamic</code>.</p>
+<p>The <code>rec</code> block can also introduce strange loops or hang the app. Although they are not that hard to debug (as you can fairly easily pin point the code causing it). But the solution often involves heuristically adding <code>delay</code> to make it work.</p>
+<p>Tip 1 - Dont re-use names like this, its very easy to mess things up and create loops.</p>
+<pre><code>rec
+  retVal &lt;- do
+    retVal &lt;- someStuff
+    ...
+    return retVal</code></pre>
+<p>Tip 2 - When the code starts to get complicated with nested <code>rec</code> blocks, create a separate function.</p>
+<p>There is also a weird problem that a polymorphic function does not type-check if defined inside a <code>let</code> block inside <code>rec</code> (without an explicit type signature). This can be annoying for a new comer, as the code is fine but still it does not compile.</p></li>
+<li><p>The <code>Reflex.Collection</code> consist of a bunch of useful widgets, but their behaviour and use-case can be dificult to comprehend.</p></li>
+<li><p>It can be tricky to handle big <code>Dynamic</code> values.</p>
+<p>For example I had to create a <code>Event t (Set Int)</code> from <code>[Dynamic t (Bool, Int)]</code>. The <code>[]</code> -&gt; <code>Set</code> -&gt; <code>tagDyn</code> approach was not good, instead <code>[]</code> -&gt; <code>tagDyn</code> -&gt; <code>Set</code> is better.</p>
+<p><code>dyn</code> is tricky, avoid it. Use <code>widgetHold</code> instead.</p></li>
+<li><p>Reflex eco-system still need a consolidated resource of information. I have done some contributions last year to the docs, and have a bunch of more stuff lying around in my local repo to update the docs.</p></li>
+<li><p>When opening the app, about 10% of the time there are some strange errors / assertion in reflex runtime like “Causality loop found”. On doing a refresh it mostly works fine.</p></li>
+<li><p>The performance of certain parts of app is terrible, I attribute it to <code>ghcjs</code> mostly (as the performance was better with <code>jsaddle-warp</code>), and hope with <code>webghc</code> things will be much better.</p></li>
+<li><p>When the structure of DOM is not according to what you desire, you have the choice to refactor code and pass <code>Event</code> and <code>Dynamic</code> all around the app, or to use some CSS magic to fix stuff (like <code>z-index</code>, <code>position: absolute</code>).</p></li>
+<li><p>When using external JS libraries with reflex-dom</p>
+<ul>
+<li><p>Delay in events are required to get things like DOM Apis / FFI to work properly.</p></li>
+<li><p>If the external JS throws an exception then the app is dead. Perhaps there is a way to catch and continue?</p></li>
+<li><p>Integration with UI libraries like Bootstrap, Semantic UI, etc is still in development, more effort is required to make it work.</p></li>
+</ul></li>
+<li><p>The use of a monadic style for DOM creation can be difficult at times, but I feel its a minor thing and the pros outweigh the cons.</p></li>
+</ul>
+<h2 id="haskey-for-persistent-db">Haskey for persistent DB</h2>
+<p>For the DB I have taken an even more experimental approach by not using any conventional DB or even acid libraries. The reason for this was I wanted simplicity in usage, and the data should not be completely in memory.</p>
+<p>The <a href="https://github.com/haskell-haskey/haskey"><code>haskey</code></a> library released in late last year fortunately had both these features.</p>
+<p>This was a very important for me to do fast development, as I re-modelled the schema dozens of times based on the requirements in Frontend, and incremental addition of small features here and there.</p>
+<p>So <code>haskey</code> is a new library and <strong>definitely not yet ready for production.</strong></p>
+<p>While still developing the application I found a <a href="https://github.com/haskell-haskey/haskey/issues/70">major bug</a> in its code, it was fixed fast thanks to the author!</p>
+<p>But the real scary stuff was; after putting the site on production my own data got corrupted after a few days. I dont know yet what happened; fortunately I had backups to recover it from the previous day.</p>
+<p>So there are definitely more bugs lurking around in the code, and the only safe way to use this library is to always take backups / snapshots (like hourly)</p>
+<p>One good thing I did with <code>haskey</code> is to keep the data of every user in a separate DB (filesystem folder). This greatly simplified my code base and doing recovery from backups.</p>
+<h4 id="migrations-in-haskey">Migrations in Haskey</h4>
+<p>For migrations I used a method inspired by <em>Trees that Grow</em> paper. The idea is to use <code>type family</code> to have different variations of a tree data structure. In my case I have just two variations of the main schema: a <code>CurrentDB</code> and an <code>OldDB</code>. The application code always works on the <code>CurrentDB</code> and the <code>OldDB</code> is used to for migrating old schema to the current one.</p>
+<p>Maintaining many versions of schema will be a much more complicated task, perhaps it can be done using this approach but I am not too sure.</p>
+<p>There were a few issues in getting the code to compile with the use of <code>type family</code>, specifically in the <code>instance</code> / <code>deriving instance</code> declarations. I have used some hit and trial to get it working. But it would be good to have a better understanding / proper way of doing it. (ie dont refer to my code as a correct way to do it, there might be bugs)</p>
+<h3 id="yesod">Yesod</h3>
+<p>The backend is using <code>yesod</code>, it is very simple to set up a web site with authentication using the existing libraries. The major work is done via websocket, so there was no need for a library like <code>servant</code>.</p>
+<h2 id="dev-workflow">Dev workflow</h2>
+<ul>
+<li>Spacemacs with simple support of haskell like syntax highlighting, and hindent</li>
+<li>Local hoogle server running from nix-shell</li>
+<li><code>./cabal new-repl</code> from the project skeleton, and sometimes ghcid.</li>
+<li>Frontend running on Chrome via <code>jsaddle-warp</code>.</li>
+</ul>
+<h2 id="final-thoughts">Final thoughts</h2>
+<ul>
+<li><p>Your application need to have a certain level of complexity to demand the use of Reflex. I think this app had a good enough complexity to deserve this.</p>
+<p>There is a learning curve with reflex. It will only pay for itself when the application is complex.</p></li>
+<li><p><code>Haskey</code> is a good library for fast prototyping, more robust DB can be put in place later.</p></li>
+<li><p>I embraced <code>lens</code> (and some of its operators) while working on this, I would say that the effort pays back.</p></li>
+<li><p>I dont have any testing stuff right now for this app. There were a few functions which were algorithmically complex, and I just created a small test function next to it, for manual testing.</p>
+<p>Things have been ok as I am the only dev working on this project. With multiple people there is definitely a need for a test-suite.</p></li>
+</ul>
+]]></summary>
+</entry>
+
+</feed>
