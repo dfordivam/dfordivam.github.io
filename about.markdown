@@ -2,8 +2,10 @@
 title: About
 ---
 
-I am currently living in Japan, in a small town call Ainan. Its a beautiful calm place surrounded by mountains, forests and sea. I like to take a stroll along the river just 100m from my home.
+I am currently living in South West Japan, in Itoshima, Fukuoka. Its a beautiful calm place surrounded by mountains, forests, sea, and locally grown organic veggies!
 
-I am doing full-time open-source Haskell development thanks to the sponsorship of my employer [Blue Impact](http://www.blueimpact.co.jp/en/)!
+I am working full-time on full-stack Haskell development work which is mostly all open-source.
 
-Previously I had experience of working on performance improvements of `vcs` Verilog simulator
+I am vegetarian and cook almost all of my meals.
+
+Previously I had experience of working on `vcs` Verilog simulator
