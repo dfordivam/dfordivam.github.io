@@ -8,8 +8,47 @@
         <name>Divam</name>
         <email>dfordivam@gmail.com</email>
     </author>
-    <updated>2018-09-23T00:00:00Z</updated>
+    <updated>2021-09-05T00:00:00Z</updated>
     <entry>
+    <title>High extraction espresso / How I make coffee</title>
+    <link href="https://dfordivam.github.io/posts/2021-09-05-espresso-high-extraction.html" />
+    <id>https://dfordivam.github.io/posts/2021-09-05-espresso-high-extraction.html</id>
+    <published>2021-09-05T00:00:00Z</published>
+    <updated>2021-09-05T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on September  5, 2021
+    
+</div>
+
+<h2 id="method">Method</h2>
+<ul>
+<li><p>Ground the coffee as fine as possible, use 10~11g for a double-shot (~35g out)</p></li>
+<li><p>Keep the grounded coffee in a moisture rich environment for 12~36 hours</p></li>
+<li><p>Make the espresso slowly (90s) at low pressure (2 bar), and aim for 1:3 ~ 1:4 ratio</p>
+<p>(1:3 is good for dark roast, for others the ratio could be increased)</p></li>
+</ul>
+<h2 id="story">Story</h2>
+<p>In early 2021, I watched a series of videos by James Hoffman on YouTube, and began doing experiments to achieve high extraction. After a few weeks of trials I settled down on this technique and has been doing it for more than six months now. The nice thing about this is that it gives good results every time. In fact it is quite hard to make a disaster even if some mistakes are made (like accidently using high pressure/flow)</p>
+<p>The key idea for achieving high extraction is to have large surface area, which in turn is obtained by grinding the coffee very fine. But the finer the grounds are the higher is the chance of a disaster, as the grounds will either block the pores of the porta filter, or result in channeling due to high resistance of the puck.</p>
+<p>The solution I devised is to let the coffee grounds absorb/adsorb moisture. Since the extraction of coffee happens by the flow of water over the grounds, if the grounds already have contact with the water it will enhance the flow of more water over it (while brewing).</p>
+<p>To achieve this passive absorption of moisture, I keep the grounded coffee in small bowls, and keep these bowls inside another container which has little bit of water in it. If this container is kept closed (with a lid) the moisture inside it should reach a very high value after a few hours. The coffee kept in it for more than 12 hours should absorb upto 15% water by weight. Also the “volume” of the coffee grounds would increase. (When clamping the coffee you can feel it; the moisture rich grounds would occupy more volume for the same amount of pressure)</p>
+<!-- Here is an illustration (fails to render properly on browser) -->
+<!--          ┌┳───────────────────────────────┳┐ -->
+<!--           │                               │ -->
+<!--           │                               │ -->
+<!--           │                               │ -->
+<!--           │  ┌           ┐ ┌           ┐  │ -->
+<!--           │  │⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿│ │⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿│  │ -->
+<!--           │┈┈│⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿│┈│⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿│┈┈│ -->
+<!--           │  └───────────┘ └───────────┘  │ -->
+<!--           └───────────────────────────────┘ -->
+<p>The other important point is to make the espresso slowly, maintaining a low pressure. Unfortunately I have a cheap “automatic” espresso maker with a rather high pressure. The way I achieve low pressure (and less flow) is by turning the machine on and off repeatidly (pulse width modulation). A manual lever machine would be very nice.</p>
+<ul>
+<li>Note that its not possible to obtain crema with this method</li>
+</ul>
+]]></summary>
+</entry>
+<entry>
     <title>Wwoofing in Kyoto</title>
     <link href="https://dfordivam.github.io/posts/2018-09-23-wwoofing-in-kyoto.html" />
     <id>https://dfordivam.github.io/posts/2018-09-23-wwoofing-in-kyoto.html</id>
@@ -21,7 +60,7 @@
 </div>
 
 <figure>
-<img src="/images/wwoof-kyoto/banner.jpg" alt="View from bedroom" /><figcaption>View from bedroom</figcaption>
+<img src="/images/wwoof-kyoto/banner.jpg" alt="View from bedroom" /><figcaption aria-hidden="true">View from bedroom</figcaption>
 </figure>
 <p>I recently went <a href="https://www.wwoofjapan.com/main/index.php?lang=en">wwoofing</a> for 10 days at <a href="https://hellofarmorganics.com/">Hello farm organics</a> in Kyoto’s Keihoko district. It is in the north mountains of Kyoto, about 1.5 hour bus ride from the city. The place is a couple Zenryu and Ava living in village, managing farm size of about a hectare, growing organic vegetables and greens, and following vegan lifestyle. Checkout their website for more info!</p>
 <p>Here I will give a brief of my experiences and things I learnt about organic farming.</p>
@@ -29,12 +68,12 @@
 <p>I was supposed to reach on Tuesday 4th, so I planned my travel on 3rd night to Osaka. But on 4th <a href="https://www.bbc.com/news/world-asia-45417035">the big typhoon (21, Jebi)</a> struck Osaka/Kyoto region, so all the transportation services were stopped that day, so I had to stay for a night in Kyoto city. The typhoon was a very strong one, and caused lots of damage in the mountain area of Kyoto, roads were blocked and the bus service to the remote town of Shuzan was stopped. On top of that the internet service and phone service to this town was disrupted for 2 days (they even spent a night without electricity). So I could not even communicate with Zenryu san, and had no idea what is the situation up there.</p>
 <p>So my stay is Kyoto city was extended for 2 more nights. But the bus service did not resume even on Friday, so finally I went to a nearby train station, and Zenryu san came to pick up.</p>
 <figure>
-<img src="/images/wwoof-kyoto/fallen-trees.jpg" alt="Fallen trees at a nearby temple" /><figcaption>Fallen trees at a nearby temple</figcaption>
+<img src="/images/wwoof-kyoto/fallen-trees.jpg" alt="Fallen trees at a nearby temple" /><figcaption aria-hidden="true">Fallen trees at a nearby temple</figcaption>
 </figure>
 <p>According to them this is the worst summer they have experienced in the last 7 years of farming. And I reached here right after the big disaster so an interesting experience was in store for me.</p>
 <p>The field where they grow vegetables in summer is just 50m from the house. It is actually the land owned by neighbours who have let them grow vegetables here.</p>
 <figure>
-<img src="/images/wwoof-kyoto/bikes.jpg" alt="Farm" /><figcaption>Farm</figcaption>
+<img src="/images/wwoof-kyoto/bikes.jpg" alt="Farm" /><figcaption aria-hidden="true">Farm</figcaption>
 </figure>
 <p>And they also have three greenhouses a little far from house for growing vegetables in winters. But a terrible thing happened there, one of the greenhouse was badly damaged in the typhoon. Last year also they had a greenhouse damaged due to winter snow, so they build a new from scratch. The new one was stronger so it survived, but the old one could not.</p>
 <h2 id="wwoof-schedule">Wwoof schedule</h2>
@@ -43,28 +82,28 @@
 <h4 id="weeding">Weeding</h4>
 <p>Remove grasses and other weeds around the beds. The machine tools can be used to cut the grass on the area around the beds, but in between the beds the weeding has to be done by hand. Doing it by hand also ensures that the weeds are pulled along with roots, especially the grasses, as they grow again so fast if the roots are left.</p>
 <figure>
-<img src="/images/wwoof-kyoto/before-weeding-path.jpg" alt="Before weeding, path between beds" /><figcaption>Before weeding, path between beds</figcaption>
+<img src="/images/wwoof-kyoto/before-weeding-path.jpg" alt="Before weeding, path between beds" /><figcaption aria-hidden="true">Before weeding, path between beds</figcaption>
 </figure>
 <figure>
-<img src="/images/wwoof-kyoto/after-weeding-path.jpg" alt="After weeding" /><figcaption>After weeding</figcaption>
+<img src="/images/wwoof-kyoto/after-weeding-path.jpg" alt="After weeding" /><figcaption aria-hidden="true">After weeding</figcaption>
 </figure>
 <figure>
-<img src="/images/wwoof-kyoto/weeding-pile-2.jpg" alt="Weeding of Bed and paths" /><figcaption>Weeding of Bed and paths</figcaption>
+<img src="/images/wwoof-kyoto/weeding-pile-2.jpg" alt="Weeding of Bed and paths" /><figcaption aria-hidden="true">Weeding of Bed and paths</figcaption>
 </figure>
 <figure>
-<img src="/images/wwoof-kyoto/weeding-pile-main.jpg" alt="Accumulate all weeds for compost" /><figcaption>Accumulate all weeds for compost</figcaption>
+<img src="/images/wwoof-kyoto/weeding-pile-main.jpg" alt="Accumulate all weeds for compost" /><figcaption aria-hidden="true">Accumulate all weeds for compost</figcaption>
 </figure>
 <h4 id="pot-saplings">Pot saplings</h4>
 <p>The seeds are grown in a small area/container, and then the saplings are transferred to a pot, one in each. These pots are then kept in a greenhouse for a couple of weeks, and then planted in the field.</p>
 <figure>
-<img src="/images/wwoof-kyoto/lettuce-saplings.jpg" alt="Saplings ready to plant on field" /><figcaption>Saplings ready to plant on field</figcaption>
+<img src="/images/wwoof-kyoto/lettuce-saplings.jpg" alt="Saplings ready to plant on field" /><figcaption aria-hidden="true">Saplings ready to plant on field</figcaption>
 </figure>
 <p>the pots used for this step need to be cleaned after use and kept in store for next season. This is to prevent the eggs of insects.</p>
 <figure>
-<img src="/images/wwoof-kyoto/pots-before-clean.jpg" alt="Before cleaning" /><figcaption>Before cleaning</figcaption>
+<img src="/images/wwoof-kyoto/pots-before-clean.jpg" alt="Before cleaning" /><figcaption aria-hidden="true">Before cleaning</figcaption>
 </figure>
 <figure>
-<img src="/images/wwoof-kyoto/pots-after-clean.jpg" alt="After cleaning" /><figcaption>After cleaning</figcaption>
+<img src="/images/wwoof-kyoto/pots-after-clean.jpg" alt="After cleaning" /><figcaption aria-hidden="true">After cleaning</figcaption>
 </figure>
 <h4 id="bed-prepare">Bed prepare</h4>
 <ol type="1">
@@ -77,81 +116,81 @@
 </ol>
 <p>The below area was planted with a grass useful as manure and later the grass was cut and left in it to get composted. Initially the a part of the area on left was also covered by the grass as shown in the right part of image.</p>
 <figure>
-<img src="/images/wwoof-kyoto/bed-prepare-start.jpg" alt="Start of bed preparation" /><figcaption>Start of bed preparation</figcaption>
+<img src="/images/wwoof-kyoto/bed-prepare-start.jpg" alt="Start of bed preparation" /><figcaption aria-hidden="true">Start of bed preparation</figcaption>
 </figure>
 <p>The tilled soil was then accumulated in the form of rows, one of them is kept for use later, so it was covered with transparent plastic.</p>
 <figure>
-<img src="/images/wwoof-kyoto/bed-prepare-make-rows.jpg" alt="Make rows" /><figcaption>Make rows</figcaption>
+<img src="/images/wwoof-kyoto/bed-prepare-make-rows.jpg" alt="Make rows" /><figcaption aria-hidden="true">Make rows</figcaption>
 </figure>
 <figure>
-<img src="/images/wwoof-kyoto/prepared-beds.jpg" alt="Prepared beds" /><figcaption>Prepared beds</figcaption>
+<img src="/images/wwoof-kyoto/prepared-beds.jpg" alt="Prepared beds" /><figcaption aria-hidden="true">Prepared beds</figcaption>
 </figure>
 <p>Here holes were made 20cm apart in three rows, then compost was added, followed by neem powder. This was not planted at that time due to rains.</p>
 <figure>
-<img src="/images/wwoof-kyoto/bed-with-holes.jpg" alt="Bed for turnip" /><figcaption>Bed for turnip</figcaption>
+<img src="/images/wwoof-kyoto/bed-with-holes.jpg" alt="Bed for turnip" /><figcaption aria-hidden="true">Bed for turnip</figcaption>
 </figure>
 <p>In case of planting potatoes the bed is not covered in plastic, instead rice straws are put on top to preserve moisture and prevent weeds. A few weeks later there might be a need to cover it with plastic to increase soil temperature. The potatoes were already sprouting when planted, and their texture became a little soft.</p>
 <figure>
-<img src="/images/wwoof-kyoto/bed-prepare-plant-potato.jpg" alt="Planted potatoes" /><figcaption>Planted potatoes</figcaption>
+<img src="/images/wwoof-kyoto/bed-prepare-plant-potato.jpg" alt="Planted potatoes" /><figcaption aria-hidden="true">Planted potatoes</figcaption>
 </figure>
 <h4 id="plant-saplings">Plant saplings</h4>
 <p>Usually when the bed has been prepared, a hole is dug in the plastic and soil beneath, handful of compost is added, then neem powder is added on top. The plant saplings are then placed on top of that, and the soil around them is firmly pressed to a level surface. Then finally the plants are watered with the water having a little bit of EM (microbial concentrate) and charcoal liquid.</p>
 <p>For lettuce there is a special step required before planting in the field. The potted plant (along with its soil) is wrapped in a newspaper on sides such that the newspaper is an inch higher than the soil level, and covers the plant on all sides. This is done to prevent an special kind of insect, which crawls on the soil, to reach the lettuce. The planted bed is then covered with a net material with tiny holes.</p>
 <figure>
-<img src="/images/wwoof-kyoto/lettuce-potted-sapling.jpg" alt="Lettuce sapling covered with newspaper" /><figcaption>Lettuce sapling covered with newspaper</figcaption>
+<img src="/images/wwoof-kyoto/lettuce-potted-sapling.jpg" alt="Lettuce sapling covered with newspaper" /><figcaption aria-hidden="true">Lettuce sapling covered with newspaper</figcaption>
 </figure>
 <figure>
-<img src="/images/wwoof-kyoto/lettuce-potted-sapling-bed.jpg" alt="Bed covered with net" /><figcaption>Bed covered with net</figcaption>
+<img src="/images/wwoof-kyoto/lettuce-potted-sapling-bed.jpg" alt="Bed covered with net" /><figcaption aria-hidden="true">Bed covered with net</figcaption>
 </figure>
 <h3 id="harvest">Harvest</h3>
 <h4 id="tomatoes">Tomatoes</h4>
 <p>We tried to harvest a little ripe tomatoes, but in this weather most of them were destroyed. About 30% fell of the plants and rot on ground, 50% developed patches or lines, or their skin cracked open due to rain, so these cannot be sold. I think less than 20% were actually harvested.</p>
 <figure>
-<img src="/images/wwoof-kyoto/tomato-plant-zoom.jpg" alt="Small red + black cherry tomatoes" /><figcaption>Small red + black cherry tomatoes</figcaption>
+<img src="/images/wwoof-kyoto/tomato-plant-zoom.jpg" alt="Small red + black cherry tomatoes" /><figcaption aria-hidden="true">Small red + black cherry tomatoes</figcaption>
 </figure>
 <figure>
-<img src="/images/wwoof-kyoto/tomato-plant-zoom-2.jpg" alt="Tomato" /><figcaption>Tomato</figcaption>
+<img src="/images/wwoof-kyoto/tomato-plant-zoom-2.jpg" alt="Tomato" /><figcaption aria-hidden="true">Tomato</figcaption>
 </figure>
 <figure>
-<img src="/images/wwoof-kyoto/tomato-harvest.jpg" alt="Harvest, 2/3 days interval" /><figcaption>Harvest, 2/3 days interval</figcaption>
+<img src="/images/wwoof-kyoto/tomato-harvest.jpg" alt="Harvest, 2/3 days interval" /><figcaption aria-hidden="true">Harvest, 2/3 days interval</figcaption>
 </figure>
 <h4 id="capsicum">Capsicum</h4>
 <p>There was much better harvest of capsicum, but still had lots of waste.</p>
 <figure>
-<img src="/images/wwoof-kyoto/capsicum-plant.jpg" alt="Capsicum/Peppers" /><figcaption>Capsicum/Peppers</figcaption>
+<img src="/images/wwoof-kyoto/capsicum-plant.jpg" alt="Capsicum/Peppers" /><figcaption aria-hidden="true">Capsicum/Peppers</figcaption>
 </figure>
 <figure>
-<img src="/images/wwoof-kyoto/capsicum-harvest.jpg" alt="Harvest" /><figcaption>Harvest</figcaption>
+<img src="/images/wwoof-kyoto/capsicum-harvest.jpg" alt="Harvest" /><figcaption aria-hidden="true">Harvest</figcaption>
 </figure>
 <h4 id="pumpkin">Pumpkin</h4>
 <p>The pumpkins were harvested once in a week. The ones developing yellow patches (due to surface contact with ground, or other things) were harvested, irrespective of its size.</p>
 <p>They were first cleaned with a wet cloth to remove all the mud, especially from its ends, and then stored for a couple of weeks.</p>
 <figure>
-<img src="/images/wwoof-kyoto/kabucha-plant.jpg" alt="Kabucha/Pumpkin" /><figcaption>Kabucha/Pumpkin</figcaption>
+<img src="/images/wwoof-kyoto/kabucha-plant.jpg" alt="Kabucha/Pumpkin" /><figcaption aria-hidden="true">Kabucha/Pumpkin</figcaption>
 </figure>
 <figure>
-<img src="/images/wwoof-kyoto/kabucha-back.jpg" alt="Kabucha surface touching ground" /><figcaption>Kabucha surface touching ground</figcaption>
+<img src="/images/wwoof-kyoto/kabucha-back.jpg" alt="Kabucha surface touching ground" /><figcaption aria-hidden="true">Kabucha surface touching ground</figcaption>
 </figure>
 <figure>
-<img src="/images/wwoof-kyoto/kabucha-enclosed.jpg" alt="Kept covered to protect from animals/crows" /><figcaption>Kept covered to protect from animals/crows</figcaption>
+<img src="/images/wwoof-kyoto/kabucha-enclosed.jpg" alt="Kept covered to protect from animals/crows" /><figcaption aria-hidden="true">Kept covered to protect from animals/crows</figcaption>
 </figure>
 <figure>
-<img src="/images/wwoof-kyoto/kabucha-harvest.jpg" alt="Harvest" /><figcaption>Harvest</figcaption>
+<img src="/images/wwoof-kyoto/kabucha-harvest.jpg" alt="Harvest" /><figcaption aria-hidden="true">Harvest</figcaption>
 </figure>
 <figure>
-<img src="/images/wwoof-kyoto/kabucha-storage.jpg" alt="Storage" /><figcaption>Storage</figcaption>
+<img src="/images/wwoof-kyoto/kabucha-storage.jpg" alt="Storage" /><figcaption aria-hidden="true">Storage</figcaption>
 </figure>
 <h4 id="eggplant">Eggplant</h4>
 <p>Eggplant was the one able to survive best this weather. This is perhaps one of the reason we ate it everyday, in every meal :D</p>
 <figure>
-<img src="/images/wwoof-kyoto/eggplant-plants.jpg" alt="Eggplant" /><figcaption>Eggplant</figcaption>
+<img src="/images/wwoof-kyoto/eggplant-plants.jpg" alt="Eggplant" /><figcaption aria-hidden="true">Eggplant</figcaption>
 </figure>
 <p>Some plants had problems, like they were not producing good fruits. So they were pruned, and compost was added to their roots. They are supposed to grow back again in few weeks and produce more fruits.</p>
 <figure>
-<img src="/images/wwoof-kyoto/eggplant-plant-pruned.jpg" alt="Adding compost to the pruned eggplant roots" /><figcaption>Adding compost to the pruned eggplant roots</figcaption>
+<img src="/images/wwoof-kyoto/eggplant-plant-pruned.jpg" alt="Adding compost to the pruned eggplant roots" /><figcaption aria-hidden="true">Adding compost to the pruned eggplant roots</figcaption>
 </figure>
 <figure>
-<img src="/images/wwoof-kyoto/eggplant-packed.jpg" alt="Ready for market" /><figcaption>Ready for market</figcaption>
+<img src="/images/wwoof-kyoto/eggplant-packed.jpg" alt="Ready for market" /><figcaption aria-hidden="true">Ready for market</figcaption>
 </figure>
 <h4 id="others">Others</h4>
 <p>For baby salad mix a number of herbs/greens were harvested like parsley, lettuce. This is also their main production in the winter months.</p>
@@ -164,31 +203,31 @@
 <li><p>A translucent breathable material - This is a special material that does not allow any insects to pass through. Though air and little water can go through it. It is perhaps the best material to cover planted beds, but it is expensive and very fragile. It can be used to cover the soil directly, but mostly it is used to cover the plants, especially the delicate ones like baby salad and herbs.</p></li>
 </ol>
 <figure>
-<img src="/images/wwoof-kyoto/translucent-material.jpg" alt="Translucent material" /><figcaption>Translucent material</figcaption>
+<img src="/images/wwoof-kyoto/translucent-material.jpg" alt="Translucent material" /><figcaption aria-hidden="true">Translucent material</figcaption>
 </figure>
 <ol start="4" type="1">
 <li>Net - This material has tiny holes in it and can allow little insects to pass through. It is the most common material to cover a planted bed. It is much more stronger than the translucent material.</li>
 </ol>
 <h4 id="support-structure-types.">Support Structure types.</h4>
 <figure>
-<img src="/images/wwoof-kyoto/curved-plastic-support.jpg" alt="Simple curved plastic supports" /><figcaption>Simple curved plastic supports</figcaption>
+<img src="/images/wwoof-kyoto/curved-plastic-support.jpg" alt="Simple curved plastic supports" /><figcaption aria-hidden="true">Simple curved plastic supports</figcaption>
 </figure>
 <figure>
-<img src="/images/wwoof-kyoto/wooden-stick-support.jpg" alt="Small wood sticks" /><figcaption>Small wood sticks</figcaption>
+<img src="/images/wwoof-kyoto/wooden-stick-support.jpg" alt="Small wood sticks" /><figcaption aria-hidden="true">Small wood sticks</figcaption>
 </figure>
 <figure>
-<img src="/images/wwoof-kyoto/metal-rods-support.jpg" alt="Metal rods, tied with strong plastic" /><figcaption>Metal rods, tied with strong plastic</figcaption>
+<img src="/images/wwoof-kyoto/metal-rods-support.jpg" alt="Metal rods, tied with strong plastic" /><figcaption aria-hidden="true">Metal rods, tied with strong plastic</figcaption>
 </figure>
 <figure>
-<img src="/images/wwoof-kyoto/metal-rods-curved-support.jpg" alt="Metal U shaped support" /><figcaption>Metal U shaped support</figcaption>
+<img src="/images/wwoof-kyoto/metal-rods-curved-support.jpg" alt="Metal U shaped support" /><figcaption aria-hidden="true">Metal U shaped support</figcaption>
 </figure>
 <h4 id="wood-cutting">Wood cutting</h4>
 <p>I also did some wood cutting one evening. The peach tree in their home garden fell due to the typhoon, and it had to be cut. I cut some branches into smaller size pieces for use in the water heater.</p>
 <figure>
-<img src="/images/wwoof-kyoto/peach-tree.jpg" alt="Peach tree" /><figcaption>Peach tree</figcaption>
+<img src="/images/wwoof-kyoto/peach-tree.jpg" alt="Peach tree" /><figcaption aria-hidden="true">Peach tree</figcaption>
 </figure>
 <figure>
-<img src="/images/wwoof-kyoto/cut-wood.jpg" alt="Cut wood" /><figcaption>Cut wood</figcaption>
+<img src="/images/wwoof-kyoto/cut-wood.jpg" alt="Cut wood" /><figcaption aria-hidden="true">Cut wood</figcaption>
 </figure>
 ]]></summary>
 </entry>
